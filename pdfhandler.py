@@ -24,6 +24,5 @@ def load_pdf(file):
         print(f"Error parsing PDF: {e}")
         return None
 
-page_count, text = load_pdf('PDFs/Selected_OneNYC_Summary.pdf')
-print(f"{page_count} pages")
-print(text)
+# print(f"{page_count} pages")
+# print(text)
