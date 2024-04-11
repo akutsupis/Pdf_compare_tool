@@ -1,3 +1,8 @@
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+
 def request(model, system, rfp, proposal):
     """
     This function makes a request to the OpenAI API and returns the response.
@@ -5,15 +10,23 @@ def request(model, system, rfp, proposal):
     Parameters:
     model (str): The model to be used for the request. For example, 'gpt-3.5-turbo'.
     system (str): The system message to initialize the conversation.
-    master_plan (str): The city's master plan.
+    rfp (str): The city's request for proposal.
     proposal (str): The land developer's proposal.
 
     Returns:
     str: The message returned by the model. If an error occurs during the request, the function returns None.
 
     """
+    load_dotenv()  # take environment variables from .env.
+
+    # Code of your application, which uses environment variables (e.g. from `os.environ` or
+    # `os.getenv`) as if they came from the actual environment.
+
+    API_KEY = os.getenv('OPENAI_API_KEY')
+    if not API_KEY:
+        print("Error: The OPENAI_API_KEY environment variable is not set.")
+        return None
     try:
-        from openai import OpenAI
         # Initialize the OpenAI client with the base URL and API key
         client = OpenAI(base_url="https://openai.vocareum.com/v1", api_key=API_KEY)
 
@@ -29,10 +42,9 @@ def request(model, system, rfp, proposal):
          )
 
         # Return the message from the first choice in the completion
-        return completion.choices[0].message
+        return (completion)
+        #completion.choices[0].message)
 
     except Exception as e:
 
-        print(f"An error occurred: {e}")
-
-        return None
+        return f"An error occurred: {e}"
