@@ -1,25 +1,25 @@
+from fastapi import FastAPI, UploadFile, File, Form
 from requests_func import request
 from pdfhandler import load_pdf
-from remove_stopwords import remove_stopwords
-from summarizer_func import summarize_text
+import shutil
+import os
+import uvicorn
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 
-def main(request_for_proposals, proposal, system):
+@app.post("/uploadfiles/")
+async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(...), system: str = Form(...)):
+    temp_rfp = await save_upload_file_tmp(rfp)
+    temp_proposal = await save_upload_file_tmp(proposal)
+
     # Load PDF for city plan and proposal
-    plan_page_count, request_text = load_pdf(request_for_proposals)
-    proposal_page_count, proposal_text = load_pdf(proposal)
-
-    # if mode_switch == 'stopwords':
-    #     # test option, removal of stopwords to reduce tokens
-    #     request_text = remove_stopwords(request_text)
-    #     proposal_text = remove_stopwords(proposal_text)
-    #     return request_text, proposal_text
-    #
-    # if mode_switch == 'summarize':
-    #     # Summarize the master plan and proposal
-    #     request_text = summarize_text(request_text)
-    #     proposal_text = summarize_text(proposal_text)
-    #     return request_text, proposal_text
+    plan_page_count, request_text = load_pdf(temp_rfp)
+    proposal_page_count, proposal_text = load_pdf(temp_proposal)
 
     # Make a request to the OpenAI API
     response = request('gpt-3.5-turbo',
@@ -27,10 +27,24 @@ def main(request_for_proposals, proposal, system):
                        request_text,
                        proposal_text)
 
-    return print(response)
+    # Clean up the temporary files
+    os.remove(temp_rfp)
+    os.remove(temp_proposal)
 
+    return {"response": response}
+
+
+async def save_upload_file_tmp(upload_file: UploadFile, tmp_dir="temp"):
+    try:
+        os.makedirs(tmp_dir)
+    except FileExistsError:
+        pass
+
+    temp_file = os.path.join(tmp_dir, upload_file.filename)
+    with open(temp_file, "wb") as buffer:
+        shutil.copyfileobj(upload_file.file, buffer)
+
+    return temp_file
 
 if __name__ == "__main__":
-    main('PDFs/State_Street_Campus_Garage_RFP.pdf',
-         'PDFs/Greystar_response.pdf',
-         'You are an urban planner. Your goal is to compare the proposal to the request for proposal. Does the proposal fully align with the request? Compare and summarize. What suggestions would you make to improve the proposal, given the request and the local context you are aware of for this area?')
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
