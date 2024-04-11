@@ -85,7 +85,6 @@ sympy = "==1.12"
 tensorboard = "==2.16.2"
 tensorboard-data-server = "==0.7.2"
 tensorflow = "==2.16.1"
-tensorflow-intel = "==2.16.1"
 tensorflow-io-gcs-filesystem = "==0.31.0"
 termcolor = "==2.4.0"
 thinc = "==8.2.3"
@@ -109,4 +108,4 @@ zipp = "==3.18.1"
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"

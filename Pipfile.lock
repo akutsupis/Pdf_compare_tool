@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5ef802a21224df7f76ad902711dcebbce26ad45f66ff1ee63ed431a9cafdbd3d"
+            "sha256": "9152a79d826d8adfbadb958176a3c94fca3b3342d9ad49acd28cd815cc0c01f3"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.9"
+            "python_version": "3.10"
         },
         "sources": [
             {
@@ -1482,7 +1482,7 @@
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
             "index": "pypi",
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.16.0"
         },
         "smart-open": {
@@ -1669,8 +1669,7 @@
                 "sha256:a2aed5f5f7a9e22bcedd843d7bc3595eaf75510662f8f3d113ee3223fefed16a",
                 "sha256:e7a12cb9668bb02c9855804854f2fb088b58094abab7b0b9706bb4fd607faa79"
             ],
-            "index": "pypi",
-            "markers": "python_version >= '3.9'",
+            "markers": "platform_system == 'Windows'",
             "version": "==2.16.1"
         },
         "tensorflow-io-gcs-filesystem": {
