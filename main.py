@@ -37,7 +37,7 @@ async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(
     proposal_page_count, proposal_text = load_pdf(temp_proposal)
 
     # Make a request to the OpenAI API
-    response = request('gpt-4.0-turbo',
+    response = request('gpt-4-turbo',
                        system,
                        request_text,
                        proposal_text)
