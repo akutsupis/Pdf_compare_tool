@@ -2,9 +2,9 @@
 
 ## Description
 
-This is a web application built with React and FastAPI. It allows users to compare two PDF documents using OpenAI's ChatGPT.
+This is a web application built with a React frontend and FastAPI + Python backend. It allows users to compare two PDF documents using OpenAI's ChatGPT.
 It is intended for use by urban planners and other professionals in assessing bid responses to a Request for Proposal (RFP).
-PDF files are parsed using PyPDF.
+PDF files are parsed locally using PyPDF.
 Users can freely use my code and deploy their own version, but will need an OpenAI API key to do so.
 
 ## Installation
