@@ -62,7 +62,26 @@ const FileUpload = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-      {response && <div><h3>Response</h3><p>{response}</p></div>}
+      {response && (
+        <div>
+          <h3>Response Details</h3>
+          <div>
+            <strong>Message Content:</strong>
+            {/* Access the content within the first choice */}
+            <pre>{response.choices && response.choices[0].message.content}</pre>
+          </div>
+          <div>
+            <strong>Model Used:</strong>
+            {/* Directly printing the model used */}
+            <pre>{response.model}</pre>
+          </div>
+          <div>
+            <strong>Total Tokens:</strong>
+            {/* Access the total tokens */}
+            <pre>{response.usage && response.usage.total_tokens}</pre>
+          </div>
+        </div>
+        )}
     </div>
   );
 };
