@@ -43,7 +43,6 @@ def request(model, system, rfp, proposal):
 
         # Return the message from the first choice in the completion
         return (completion)
-        #completion.choices[0].message)
 
     except Exception as e:
 

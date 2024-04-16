@@ -10,8 +10,8 @@ app = FastAPI()
 
 # Set up CORS middleware options
 origins = [
-    "http://localhost:3000",  # assuming your React app runs on localhost:3000
-    "http://127.0.0.1:3000",
+    "http://localhost:3000",  # React app runs on localhost:3000
+    "http://127.0.0.1:3000",  # FastAPI server runs on 127.0.0.1:3000
 ]
 
 app.add_middleware(
@@ -37,7 +37,7 @@ async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(
     proposal_page_count, proposal_text = load_pdf(temp_proposal)
 
     # Make a request to the OpenAI API
-    response = request('gpt-3.5-turbo',
+    response = request('gpt-4.0-turbo',
                        system,
                        request_text,
                        proposal_text)
