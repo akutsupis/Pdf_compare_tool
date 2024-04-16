@@ -23,6 +23,3 @@ def load_pdf(file):
     except Exception as e:
         print(f"Error parsing PDF: {e}")
         return None
-
-# print(f"{page_count} pages")
-# print(text)
