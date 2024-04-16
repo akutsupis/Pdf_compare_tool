@@ -1,10 +1,13 @@
 import React from 'react';
 import FileUpload from './FileUpload';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>File Upload to FastAPI Backend</h1>
+      <div className="card">
+        <h1>BidAssessor AI</h1>
+      </div>
       <FileUpload />
     </div>
   );
