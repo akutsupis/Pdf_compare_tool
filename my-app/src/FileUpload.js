@@ -18,6 +18,9 @@ const prefillTexts = [
   'Examine the submitted proposal relative to the RFP and identify elements that could be refined to increase the proposal\'s effectiveness and likelihood of acceptance. Propose modifications to the scope of work, project timelines, budget details, or any other sections you find would benefit from revisions.'
 ];
 
+const passcode = process.env.REACT_APP_PASSCODE;
+console.log("Passcode: ", passcode);
+
   const handlePrefill = (text) => {
     setSystem(text); // Update the system state with the prefill text
   };
@@ -29,7 +32,7 @@ const prefillTexts = [
     formData.append('rfp', rfp);
     formData.append('proposal', proposal);
     formData.append('system', system);
-    formData.append('passcode', process.env.PASSCODE);
+    formData.append('passcode', passcode);
 
 
     try {
