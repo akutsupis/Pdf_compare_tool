@@ -29,9 +29,11 @@ const prefillTexts = [
     formData.append('rfp', rfp);
     formData.append('proposal', proposal);
     formData.append('system', system);
+    formData.append('passcode', process.env.PASSCODE);
+
 
     try {
-      const res = await axios.post('http://127.0.0.1:8000/uploadfiles/', formData, {
+      const res = await axios.post('https://pdf-compare-tool-r48a.onrender.com/uploadfiles/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
