@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from requests_func import request
 from pdfhandler import load_pdf
@@ -26,10 +26,6 @@ app.add_middleware(
 def read_root():
     return {"Add": "Wrong place, buddy"}
 
-
-@app.post("/uploadfiles/")
-from fastapi import HTTPException
-import os
 
 @app.post("/uploadfiles/")
 async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(...), system: str = Form(...), passcode: str = Form(...)):
