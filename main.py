@@ -11,14 +11,14 @@ app = FastAPI()
 # Set up CORS middleware options
 origins = [
     "http://localhost:3000",  # React app runs on localhost:3000
-    "http://127.0.0.1:3000",  # FastAPI server runs on 127.0.0.1:3000
+    "https://pdf-compare-tool-r48a.onrender.com",  # FastAPI server runs on 127.0.0.1:3000
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Allows specific origins (websites)
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
+    allow_methods=["POST"],  # Allows all methods
     allow_headers=["*"],   # Allows all headers
 )
 
