@@ -30,7 +30,7 @@ def read_root():
 @app.post("/uploadfiles/")
 async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(...), system: str = Form(...), passcode: str = Form(...)):
     # Get the password from the environment
-    env_passcode = os.getenv('PASSCODE')
+    env_passcode = os.getenv('REACT_APP_PASSCODE')
 
     # Check if the passwords match
     if passcode != env_passcode:
