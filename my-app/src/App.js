@@ -10,6 +10,7 @@ function App() {
         <h1>BidAssessor AI</h1>
       </div>
       <FileUpload />
+       <Analytics />
     </div>
   );
 }
