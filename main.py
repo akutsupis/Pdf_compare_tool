@@ -10,7 +10,7 @@ app = FastAPI()
 
 # Set up CORS middleware options
 origins = [
-    "http://localhost:3000",  # React app runs on localhost:3000
+    "https://pdf-compare-tool.vercel.app/",  # React app runs on localhost:3000
     "https://pdf-compare-tool-r48a.onrender.com",  # FastAPI server runs on 127.0.0.1:3000
 ]
 
