@@ -1,7 +1,8 @@
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from requests_func import request
 from pdfhandler import load_pdf
+from fastapi.responses import JSONResponse
 import shutil
 import os
 import uvicorn
@@ -44,7 +45,7 @@ async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(
     proposal_page_count, proposal_text = load_pdf(temp_proposal)
 
     # Make a request to the OpenAI API
-    response = request('gpt-4-turbo',
+    response = request('gpt-3.5-turbo',
                        system,
                        request_text,
                        proposal_text)
@@ -67,6 +68,14 @@ async def save_upload_file_tmp(upload_file: UploadFile, tmp_dir="temp"):
         shutil.copyfileobj(upload_file.file, buffer)
 
     return temp_file
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"message": str(exc.detail)},
+    )
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
