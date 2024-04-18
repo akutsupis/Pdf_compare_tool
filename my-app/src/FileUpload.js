@@ -10,6 +10,7 @@ const FileUpload = () => {
   const [system, setSystem] = useState('');
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null); //Default error state
 
   // An array of predefined text prompts
 const prefillTexts = [
@@ -27,6 +28,7 @@ const passcode = process.env.REACT_APP_PASSCODE;
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
+    setError(null);
     const formData = new FormData();
     formData.append('rfp', rfp);
     formData.append('proposal', proposal);
@@ -43,15 +45,11 @@ const passcode = process.env.REACT_APP_PASSCODE;
       setResponse(res.data.response);
     } catch (error) {
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.error('There was an error uploading the files: ', error.response.data.message);
+        setError('There was an error uploading the files: ' + error.response.data.message);
       } else if (error.request) {
-        // The request was made but no response was received
-        console.error('There was an error uploading the files: ', error.message);
+        setError('There was an error uploading the files: ' + error.message);
       } else {
-        // Something happened in setting up the request that triggered an Error
-        console.error('Error: ', error.message);
+        setError('Error: ' + error.message);
       }
     } finally {
       setLoading(false);
@@ -101,9 +99,11 @@ const passcode = process.env.REACT_APP_PASSCODE;
         <button type="submit" disabled={loading}>{loading ? 'Loading...' : 'Submit'}</button>
       </form>
 
-      {response && (
-        <div className="ResponseDetails">
-          <h2>Response Details</h2>
+      {error ? (
+      <div className="ErrorMessage">{error}</div>
+    ) : response && (
+      <div className="ResponseDetails">
+        <h2>Response Details</h2>
           <div>
             <strong>Message Content:</strong>
             <pre>{response.choices && response.choices[0].message.content}</pre>
