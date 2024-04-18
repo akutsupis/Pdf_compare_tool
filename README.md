@@ -6,6 +6,9 @@ This is a web application built with a React frontend and FastAPI + Python backe
 It is intended for use by urban planners and other professionals in assessing bid responses to a Request for Proposal (RFP).
 PDF files are parsed locally using PyPDF.
 Users can freely use my code and deploy their own version, but will need an OpenAI API key to do so.
+This version is hosted online at https://pdf-compare-tool.vercel.app/ where you can try it for free. However, it will be limited when used in this way because use of my key incurs real costs.
+
+The frontend is hosted on Vercel and the backend is on render.com, running in the free tier. The server is slow to spin up, spin down, and to process pdf documents- expect a request to take 2+ minutes. If the "Submit" button is greyed out, it is working!
 
 ## Installation
 
