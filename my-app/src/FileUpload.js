@@ -45,12 +45,17 @@ const passcode = process.env.REACT_APP_PASSCODE;
       setResponse(res.data.response);
     } catch (error) {
       if (error.response) {
-        setError('There was an error uploading the files: ' + error.response.data.message);
+        let errorMessage = 'There was an error uploading the files.';
+        if (error.response.data && error.response.data.message) {
+          errorMessage += ' ' + error.response.data.message;
+        }
+        setError(errorMessage);
       } else if (error.request) {
         setError('There was an error uploading the files: ' + error.message);
       } else {
         setError('Error: ' + error.message);
       }
+
     } finally {
       setLoading(false);
     }
