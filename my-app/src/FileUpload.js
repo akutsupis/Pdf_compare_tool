@@ -19,7 +19,6 @@ const prefillTexts = [
 ];
 
 const passcode = process.env.REACT_APP_PASSCODE;
-console.log("Passcode: ", passcode);
 
   const handlePrefill = (text) => {
     setSystem(text); // Update the system state with the prefill text
