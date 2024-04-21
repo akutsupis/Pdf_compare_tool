@@ -32,6 +32,7 @@ def read_root():
 async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(...), system: str = Form(...), passcode: str = Form(...)):
     # Get the password from the environment
     env_passcode = os.getenv('REACT_APP_PASSCODE')
+    model = os.getenv('OPENAI_MODEL')
 
     # Check if the passwords match
     if passcode != env_passcode:
@@ -45,7 +46,7 @@ async def upload_files(rfp: UploadFile = File(...), proposal: UploadFile = File(
     proposal_page_count, proposal_text = load_pdf(temp_proposal)
 
     # Make a request to the OpenAI API
-    response = request('gpt-3.5-turbo',
+    response = request(model,
                        system,
                        request_text,
                        proposal_text)
